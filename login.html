@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录</title>
+
+  <!-- core CSS -->
+  <link href="./lib/css/bulma.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="./assets/css/common.css">
+
+  <meta name="title" content="登录">
+  <meta name="description" content="登录" />
+
+  <meta property="og:title" content="登录" />
+  <meta property="og:site_name" content="登录">
+  <meta property="og:description" content="登录" />
+</head>
+
+<body>
+  <section class="section hero is-light is-bold is-fullheight">
+    <div class="hero-head">
+      <header class="nav">
+        <div class="container">
+          <div class="nav-left">
+            <a class="nav-item is-primary">欢迎使用本系统</a>
+          </div>
+          <div class="nav-right nav-menu">
+            <p class="button is-link" onclick="window.close();">退出</p>
+            <span class="nav-item">
+          </div>
+        </div>
+      </header>
+    </div>
+
+
+    <form class="login-form" action="index.html" method="post" class="has-text-centered">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p class="title">请登录</p>
+        </div>
+      </div>
+      <p class="control">
+        <input class="input" type="text" placeholder="请输入学号/工号" id="account">
+      </p>
+      <p class="control">
+        <input class="input" type="password" placeholder="请输入密码" id="password">
+      </p>
+      <p class="control">
+        <input class="input" type="text" placeholder="请输入姓名" id="name">
+      </p>
+      <p class="control">
+        <input class="input" type="text" placeholder="请输入学院" id="department">
+      </p>
+      <p class="control">
+        <label class="radio">
+          <input type="radio" checked="" name="category" value="student"> 学生
+        </label>
+        <label class="radio">
+          <input type="radio" name="category" value="teacher"> 教师
+        </label>
+      </p>
+      <div class="notification is-info">
+
+        注：登录时仅输入用户名密码即可
+      </div>
+      <p class="control" style="text-align: center">
+        <button class="button is-primary" type="submit" id="button-login">登录</button>
+        <button class="button is-link" id="button-register">注册</button>
+      </p>
+    </form>
+
+    <footer>
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>
+              Powered by Sherry赵宇瑄. EECS, 2016.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <script src="./lib/js/jquery.min.js"></script>
+  <script src="./js/login.js"></script>
+  <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+  <script type="text/javascript" src="js/jquery.cookie.js"></script>
+</body>
+
+</html>

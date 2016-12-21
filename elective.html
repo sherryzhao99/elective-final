@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学生选课系统</title>
+
+  <!-- core CSS -->
+  <link href="./lib/css/bulma.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="./assets/css/common.css">
+
+  <meta name="title" content="选课系统">
+  <meta name="description" content="选课系统:一个计概作业" />
+
+  <meta property="og:title" content="选课系统" />
+  <meta property="og:url" content="http://no.url/" />
+  <meta property="og:site_name" content="选课系统">
+  <meta property="og:description" content="选课系统:一个计概作业" />
+
+  <style type="text/css">
+    table td, .table th {
+      text-align: center;
+    }
+
+    table {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+
+</style>
+
+</head>
+
+<body>
+  <section class="section hero is-light is-bold is-fullheight">
+    <div class="hero-head">
+      <header class="nav">
+        <div class="container">
+          <div class="nav-left">
+              <a class="nav-item">欢迎使用本系统</a>
+          </div>
+
+          <div class="nav-right nav-menu">
+            <p class="button is-link" onclick="window.close();">退出</p>
+            <span class="nav-item">
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <div style="margin-top: 10px;margin-right: 0px;margin-bottom: -20px;margin-left: 250px;">
+      <h3>选课／退课</h3>
+    </div>
+      <div class="control is-grouped" style="margin-top: 0px;margin-right: 0;margin-bottom: -80px;margin-left: 200px;">
+        <p class="control">
+          <input class="input is-primary" type="text" placeholder=要添加的课程 id="coursename1">
+        </p>
+        <p class="control">
+          <button class="button is-primary" type="submit" id="button-toselect">选课</button>
+        </p>
+
+
+        <p class="control">
+          <input class="input is-danger" type="text" placeholder=要删除的课程 id="coursename2">
+        </p>
+        <p class="control">
+          <button class="button is-danger" type="submit" id="button-todrop" >退课</button>
+        </p>
+      </div >
+      <div style="margin-top: 0px; margin-right: 10px;margin-bottom: 20px;margin-left: 800px;">
+        <p class="button is-link" ,"level-item">您的账号：</p>
+        <p style="margin-left: 50px;" id="currentname"></p>
+        <!--<button class="button is-link","level-item" id="current">计算概论</button>-->
+      </div>
+    </div>
+      <div class="level-item">
+      <table class="table is-striped" align="center">
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>课程名</th>
+            <th>剩余人数</th>
+            <th>上限人数</th>
+            <th>状态</th>
+          </tr>
+        </thead>
+        <tbody id="resultTable">
+        </tbody>
+
+      </table>
+    </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>
+              Powered by Sherry. EECS, 2016.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <script src="./lib/js/jquery.min.js"></script>
+  <script src="./js/index.js"></script>
+  <script src="./js/student elective.js"></script>
+</body>
+
+</html>
