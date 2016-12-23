@@ -10,29 +10,14 @@
   <link href="./lib/css/bulma.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link rel="stylesheet" href="./assets/css/common.css">
+  <link rel="stylesheet" href="./css/common.css">
 
   <meta name="title" content="选课系统">
-  <meta name="description" content="选课系统:一个计概作业" />
+  <meta name="description" content="选课系统">
 
-  <meta property="og:title" content="选课系统" />
-  <meta property="og:url" content="http://no.url/" />
+  <meta property="og:title" content="选课系统">
   <meta property="og:site_name" content="选课系统">
-  <meta property="og:description" content="选课系统:一个计概作业" />
-
-  <style type="text/css">
-    table td, .table th {
-      text-align: center;
-    }
-
-    table {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-
-</style>
-
+  <meta property="og:description" content="选课系统">
 </head>
 
 <body>
@@ -41,65 +26,41 @@
       <header class="nav">
         <div class="container">
           <div class="nav-left">
-              <a class="nav-item">欢迎使用本系统</a>
+            <p class="nav-item is-primary">欢迎使用本系统</p>
           </div>
-
           <div class="nav-right nav-menu">
-            <p class="button is-link" onclick="window.close();">退出</p>
-            <span class="nav-item">
+            <a class="nav-item" onclick="exit()">退出</a>
           </div>
         </div>
       </header>
     </div>
 
-    <div style="margin-top: 10px;margin-right: 0px;margin-bottom: -20px;margin-left: 250px;">
-      <h3>选课／退课</h3>
+    <h3>选课／退课</h3>
+    
+    <div class="level-right">
+      <p class="button" id="button-current-account">当前账户: 无</p>
     </div>
-      <div class="control is-grouped" style="margin-top: 0px;margin-right: 0;margin-bottom: -80px;margin-left: 200px;">
-        <p class="control">
-          <input class="input is-primary" type="text" placeholder=要添加的课程 id="coursename1">
-        </p>
-        <p class="control">
-          <button class="button is-primary" type="submit" id="button-toselect">选课</button>
-        </p>
 
-
-        <p class="control">
-          <input class="input is-danger" type="text" placeholder=要删除的课程 id="coursename2">
-        </p>
-        <p class="control">
-          <button class="button is-danger" type="submit" id="button-todrop" >退课</button>
-        </p>
-      </div >
-      <div style="margin-top: 0px; margin-right: 10px;margin-bottom: 20px;margin-left: 800px;">
-        <p class="button is-link" ,"level-item">您的账号：</p>
-        <p style="margin-left: 50px;" id="currentname"></p>
-        <!--<button class="button is-link","level-item" id="current">计算概论</button>-->
-      </div>
-    </div>
-      <div class="level-item">
-      <table class="table is-striped" align="center">
-        <thead>
-          <tr>
-            <th>序号</th>
-            <th>课程名</th>
-            <th>剩余人数</th>
-            <th>上限人数</th>
-            <th>状态</th>
-          </tr>
-        </thead>
-        <tbody id="resultTable">
-        </tbody>
-
-      </table>
-    </div>
-    </div>
+    <table class="table is-striped" >
+      <thead>
+        <tr>
+          <th>序号</th>
+          <th>课程名</th>
+          <th>剩余人数</th>
+          <th>上限人数</th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody id="tbody-courses">
+      </tbody>
+    </table>
 
     <footer>
       <div class="container">
         <div class="content has-text-centered">
           <p>
-              Powered by Sherry. EECS, 2016.
+              Powered by Sherry赵宇瑄. EECS, 2016.
           </p>
         </div>
       </div>
@@ -107,8 +68,10 @@
   </section>
 
   <script src="./lib/js/jquery.min.js"></script>
-  <script src="./js/index.js"></script>
-  <script src="./js/student elective.js"></script>
+  <script src="./lib/js/js.cookie.js"></script>
+  <script src="./js/common.js"></script>
+  <script src="./js/locale.js"></script>
+  <script src="./js/elective.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,26 @@
+.section {
+  padding: 40px 150px;
+}
+
+.login-form {
+  margin: 0 auto;
+  width: 35%;
+}
+
+.title {
+  margin-bottom: 36px;
+}
+
+.table {
+  margin: 0 auto;
+}
+
+.table td, .table th {
+  text-align: center;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-right: 12px;
+}
