@@ -10,27 +10,14 @@
   <link href="./lib/css/bulma.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link rel="stylesheet" href="./assets/css/common.css">
+  <link rel="stylesheet" href="./css/common.css">
 
   <meta name="title" content="选课系统">
-  <meta name="description" content="选课系统:一个计概作业" />
+  <meta name="description" content="选课系统">
 
-  <meta property="og:title" content="选课系统" />
-  <meta property="og:url" content="http://no.url/" />
+  <meta property="og:title" content="选课系统">
   <meta property="og:site_name" content="选课系统">
-  <meta property="og:description" content="选课系统:一个计概作业" />
-  <style type="text/css">
-    table td, .table th {
-      text-align: center;
-    }
-
-    table {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-
-</style>
+  <meta property="og:description" content="选课系统">
 </head>
 
 <body>
@@ -39,109 +26,93 @@
       <header class="nav">
         <div class="container">
           <div class="nav-left">
-              <a class="nav-item">欢迎使用本系统</a>
+            <p class="nav-item is-primary">欢迎使用本系统</p>
           </div>
-
           <div class="nav-right nav-menu">
-          <p class="button is-link" onclick="window.close();">退出</p>
-            <span class="nav-item">
+            <a class="nav-item" onclick="exit()">退出</a>
           </div>
         </div>
       </header>
     </div>
 
+    <table class="table is-striped" >
+      <thead>
+        <tr>
+          <th>课程名</th>
+          <th>已选人数</th>
+          <th>上限人数</th>
+        </tr>
+      </thead>
+      <tbody id="tbody-courses">
+      </tbody>
+    </table>
 
-
-        <div class="control is-grouped" style="margin-top: 30px; margin-right: 0; margin-bottom: 0px;margin-left: 150px;">
-          <h3 style="margin-left: 40px;margin-right: 15px;">查询</h3>
-          <p class="control has-addons">
-            <input class="input is-primary" type="text" placeholder="请输入查询的课程名" id="coursename2">
-            <p class="control">
-              <button class="button is-primary" type="submit" id="button-find">查询</button>
-            </p>
-          </p>
-        </div>
-
-        <div class="notification" style="margin-left:190px;">
-        当前已有的课程及人数上限为：<p id="allcourses"></p>
-
-        </div>
-
-
-        <!-- Right side -->
-        <div class="level-right">
-          <p class="button is-link" style="margin-right:15px;">当前课程： <p id = "currentcourse" ></p></p>
-          <p style="margin-right:200px;" id="currentcourse"></p>
-          <!--<button class="button is-link","level-item" id="current">计算概论</button>-->
-        </div>
-
-      <table class="table is-striped" >
-        <thead>
-          <tr>
-            <th>序号</th>
-            <th>学号</th>
-            <th>姓名</th>
-            <th>学院</th>
-          </tr>
-        </thead>
-        <tbody id="resultTable">
-        </tbody>
-      </table>
-
-
-      <div class="control is-grouped" style="margin-top: 0px;margin-right: 0;margin-bottom: 0px;margin-left: 150px;">
-        <h3 style="margin-left: 40px;margin-right: 15px;">添加</h3>
+    <div class="control is-grouped">
+      <h3>查询</h3>
+      <p class="control has-addons">
+        <input class="input is-primary" type="text" placeholder="请输入查询的课程名" id="input-query-course-name">
         <p class="control">
-          <input class="input is-success" type="text" placeholder="新课程名" id="coursename1">
+          <button class="button is-primary" type="submit" id="button-query" onclick="queryCourse()">查询</button>
         </p>
-        <p class="control">
-          <input class="input is-success" type="number" placeholder="上限人数" id="maxperson1">
-        </p>
-        <p class="control">
-          <button class="button is-success" type="submit" id="button-create">添加</button>
-        </p>
-        <p class="control" style="margin-left:50px;" >
-        Notice : 为应顺国际化潮流，<br>课程名仅支持英文和数字  ^_^
       </p>
-      </div>
+    </div>
 
+    <div class="control is-grouped">
+      <h3>添加</h3>
+      <p class="control">
+        <input class="input is-success" type="text" placeholder="新课程名" id="input-new-course-name">
+      </p>
+      <p class="control">
+        <input class="input is-success" type="number" placeholder="上限人数" id="input-new-course-capacity">
+      </p>
+      <p class="control">
+        <button class="button is-success" type="submit" id="button-create" onclick="addCourse()">添加</button>
+      </p>
+    </div>
 
-      <div class="control is-grouped" style="margin-top: 0px;margin-right: 0;margin-bottom: 0px;margin-left: 150px;">
-        <h3 style="margin-left: 40px;margin-right: 15px;">编辑</h3>
-        <p class="control has-addons">
-          <input class="input is-info" type="text" placeholder="修改后的课程名" id="coursename3">
-          <p class="control">
-            <button class="button is-info" type="submit" id="button-rename">修改</button>
-          </p>
-        </p>
+    <!-- Right side -->
+    <div class="level-right">
+      <p class="button" id="button-current-course">当前课程: 无</p>
+    </div>
 
+    <table class="table is-striped" >
+      <thead>
+        <tr>
+          <th>序号</th>
+          <th>学号</th>
+          <th>姓名</th>
+          <th>学院</th>
+        </tr>
+      </thead>
+      <tbody id="tbody-students">
+      </tbody>
+    </table>
 
-        <p class="control has-addons">
-          <input class="input is-info" type="text" placeholder="修改后的课程人数" id="maxperson3">
-          <p class="control">
-            <button class="button is-info" type="submit" id="button-remax">修改</button>
-          </p>
-        </p>
-      </div>
+    <div class="control is-grouped">
+      <h3>编辑</h3>
+      <p class="control">
+        <input class="input is-info" type="text" placeholder="修改后的课程名" id="input-edit-course-name">
+      </p>
+      <p class="control">
+        <input class="input is-info" type="text" placeholder="修改后的课程人数" id="input-edit-course-capacity">
+      </p>
+      <p class="control">
+        <button class="button is-info" type="submit" id="button-edit" onclick="editCourse()">修改</button>
+      </p>
+    </div>
 
-
-      <div class="control is-grouped" style="margin-top: 0px;margin-right: 0;margin-bottom: 0px;margin-left: 150px;">
-        <h3 style="margin-left: 40px;margin-right: 15px;">删除</h3>
-        <p class="control has-addons">
-          <input class="input is-danger" type="text" placeholder="要删除的课程" id="coursename4">
-          <p class="control">
-            <button class="button is-danger" type="submit" id="button-delete">删除</button>
-          </p>
-        </p>
-      </div>
-
-
+    <div class="control is-grouped">
+      <h3>删除当前课程</h3>
+      <p class="control">
+        <button class="button is-danger" type="submit" id="button-delete" onclick="deleteCourse()">删除</button>
+      </p>
+    </div>
 
     <footer>
       <div class="container">
         <div class="content has-text-centered">
           <p>
-              Powered by Sherry. EECS, 2016.
+              Powered by Sherry赵宇瑄. EECS, 2016.
           </p>
         </div>
       </div>
@@ -149,8 +120,10 @@
   </section>
 
   <script src="./lib/js/jquery.min.js"></script>
-  <script src="./js/index.js"></script>
-  <script src="./js/teacher edit.js"></script>
+  <script src="./lib/js/js.cookie.js"></script>
+  <script src="./js/common.js"></script>
+  <script src="./js/locale.js"></script>
+  <script src="./js/edit.js"></script>
 </body>
 
 </html>

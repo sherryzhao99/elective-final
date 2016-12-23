@@ -1,109 +1,97 @@
-//localStorage.claer();
-
 function login() {
-  // 获取输入内容
-  var account = $("#account").val();
-  var password = $("#password").val();
-  var category = "";
-  $(":radio:checked").each(function() {category += $(this).val();})
-
-  // 获取本地存储用户信息列表
-  var personsJson = localStorage.persons;
-  //alert(personsJson);
-  if (personsJson == null) return false;
-  var persons = JSON.parse(personsJson);
-
+  var person = getPersonFromInput();
+  var persons = getStudentsFromLocal();
   // 遍历本地数据，如果存在匹配则返回成功
-  for (var i = 0; i < persons.length; ++i) {
-    if (persons[i].account == account
-      && persons[i].password == password
-      && persons[i].category == category) {
-      //setCookie();
-      document.cookie="currentname"+"="+escape(account);
-      //document.cookie="ii"+"="+"asdd";
-      //alert(document.cookie);
-      alert("Welcome again "+account);
-      window.open("elective.html");
-      //location.reload();
-      return true;
-    }
-  }
-  if(account == '0' && password == "0" && category == 'teacher') {
-    alert("Welcome teacher!");
-    window.open("edit.html");
-    window.close("login.html");
+  if (persons.find(function(p) { return person.validateWith(p); }) != null) {
+    Cookies.set('account', person.account);
+    Cookies.set('category', person.category);
     return true;
-
-    //$(":radio:checked").each(function() {category += $(this).val();})
-
   }
-
+  if (person.account == "0"
+      && person.password == "0" 
+      && !person.isStudent()) {
+    Cookies.set('account', person.account);
+    Cookies.set('category', person.category);
+    return true;
+  }
+  return false;
 }
 
 function register() {
-  // 获取输入内容
+  var person = getPersonFromInput();
+  var persons = getStudentsFromLocal();
+  if (person.name == ""
+      || person.account == ""
+      || person.password == ""
+      || person.department == "") {
+    alert("输入为空或不合法");
+    return;
+  }
+
+  // 遍历本地数据，如果存在该用户名，则不允许注册
+  if (persons.find(function(p) { return person.hasSameAccoutNameWith(p); }) != null) {
+    alert("该用户名已存在，无法注册");
+    return false;
+  }
+ 
+  // 将新用户的信息写入用户数据列表
+  if (person.isStudent()) {
+    persons.push(person);
+    localStorage.persons = JSON.stringify(persons);
+    return true;
+  } else {
+    alert("您不能选择教师身份注册");
+    return false;
+  }
+}
+
+function getPersonFromInput() {
   var account = $("#account").val();
   var password = $("#password").val();
   var name = $("#name").val();
   var department = $("#department").val();
-  var category = "";
-  $(":radio:checked").each(function() {category += $(this).val();})
-  var personsJson = localStorage.persons;
-  if (personsJson == null) personsJson = "[]";
-  var persons = JSON.parse(personsJson);
+  var category = $(":radio:checked").first().val();
 
-  // 遍历本地数据，如果存在该用户名，则不允许注册
-  for (var i = 0; i < persons.length; ++i) {
-    if (persons[i].account == account
-      && persons[i].category == category) {
-      alert("该用户名已存在，无法注册。");
-      return false;
-    }
-  }
- //localStorage.clear();
-  // 将新用户的信息写入用户数据列表
-  var person = {
+  return {
     account: account,
     name: name,
     category: category,
     department: department,
-    password: password
-  }
-  if(category == "student") {
-    persons.push(person);
-    localStorage.persons = JSON.stringify(persons);
+    password: password,
+    isStudent: function() { return this.category == "student"; },
+    hasSameAccoutNameWith: function(p) {
+      return this.account == p.account && this.category == p.category;
+    },
+    validateWith: function(p) {
+      return this.hasSameAccoutNameWith(p) && this.password == p.password;
+    }
+  };
+}
 
+function getStudentsFromLocal() {
+  var personsJson = localStorage.persons;
+  if (personsJson == null) personsJson = "[]";
+  return JSON.parse(personsJson);
+}
 
-     //alert(JSON.stringify(persons));
-    return true;
-  }
-  else {
-    alert("您不能选择教师身份注册。");
-    return false;
+function toNextView() {
+  if ($(":radio:checked").first().val() == "student") {
+    window.location.href = "elective.html";
+  } else {
+    window.location.href = "edit.html";
   }
 }
 
 window.onload = function() {
     $(document).ready(function() {
-         //localStorage.clear();
         $("#button-login").click(function() {
-          if (login()) {
-            window.close("login.html");
-          }
-          //if(login()) window.location.href = "edit.html";
-          else {
-            alert("用户名或密码错误");
-          }
-          return false;
+            if (login()) toNextView();
+            else alert("用户名或密码错误");
+            return false;
         });
         $("#button-register").click(function() {
-          if (register()) {
-            alert("注册成功，可登录使用");
-            //window.open("login.html");
-            //window.close();
-
-          }
-          return false;
+            if (register()) alert("注册成功，可登录使用");
+            return false;
         });
     });
 }
